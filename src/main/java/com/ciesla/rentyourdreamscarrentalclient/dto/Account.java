@@ -23,7 +23,7 @@ public class Account {
     private String lastName;
 
     @NotEmpty(message = "Email cannot be empty")
-    @EmailValidator
+//    @EmailValidator
     private String email;
 
     @NotNull
