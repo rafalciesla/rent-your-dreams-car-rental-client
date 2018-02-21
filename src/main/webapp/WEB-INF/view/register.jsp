@@ -153,10 +153,11 @@
 
     <h2 class="col-md-3">Register:</h2>
 
-    <form:form action="/register" modelAttribute="account" method="POST" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mt-5">
+    <form:form id="registration" action="/register" modelAttribute="account" method="POST" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mt-5">
         <div class="form-group">
             <label for="email">Email</label>
-            <form:input path="email" class="form-control" type="email" name="email" placeholder="Enter email" />
+            <form:input id="mail" path="email" class="form-control" type="email" name="email" placeholder="Enter email" /><span id="taken" class="error"> </span>
+            <%--<a class="btn btn-primary mt-3" onclick="valid()">Check if email is available</a>--%>
             <form:errors path="email" cssClass="error" />
         </div>
 
@@ -178,7 +179,8 @@
             <form:errors path="lastName" cssClass="error" />
         </div>
 
-        <input class="btn btn-primary mt-3" type="submit" name="submit" value="Register">
+        <input id="submi" class="btn btn-primary mt-3" type="submit" name="submit" value="Register"/>
+
     </form:form>
 
 </div>
@@ -201,4 +203,6 @@
 <script src="/js/bootstrap.min.js"></script>
 
 </body>
+<script src="/js/email-validator.js"></script>
+
 </html>
