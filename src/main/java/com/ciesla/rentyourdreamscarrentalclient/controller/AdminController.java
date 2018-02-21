@@ -97,6 +97,9 @@ public class AdminController {
     public String updateCar(@Valid @ModelAttribute("car") Car car, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             Integer carId = car.getId();
+            if(car.getRentedToUserId() == null) {
+                car.setAvailability(true);
+            }
             return "redirect:/admin/update/car/" + carId;
         }
 
