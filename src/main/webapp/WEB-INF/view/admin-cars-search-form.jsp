@@ -19,6 +19,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Set the page to the width of the device and set the zoon level -->
+
     <meta name="viewport" content="width = device-width, initial-scale = 1">
     <title>Rent Your Dream</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
