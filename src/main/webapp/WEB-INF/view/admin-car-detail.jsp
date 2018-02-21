@@ -185,7 +185,7 @@
 
                 <c:if test="${account != null}">
                     <div class="border-top">
-                        <p class="mt-3">Rented by ${account.firstName} ${account.lastName} (${account.email})</p>
+                        <p class="mt-3">Rented to ${account.firstName} ${account.lastName} (${account.email})</p>
                         <p>
                             <form:form action="/admin/return" method="POST">
                                 <input type="hidden" name="accountId" value="${account.id}">
