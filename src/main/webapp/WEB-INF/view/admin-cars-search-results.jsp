@@ -146,6 +146,7 @@
                         </security:authorize>
                         <c:if test="${pageContext.request.userPrincipal.name != null}"><a class="dropdown-item" href="<c:url value="/logout" />">Logout</a></c:if>
                     </div>
+
                 </div>
             </div>
         </div>
