@@ -173,13 +173,28 @@
                 </dl>
             </div>
             <div class="col-md-6 p-3">
+                <div class="row">
+                    <p class="m-3">${car.description}</p>
 
-                <p>${tempCar.description}</p>
+                    <a class="btn btn-primary m-3" href="${pageContext.request.contextPath}/admin/update/car?carId=${car.id}">Update</a>
+                    <form:form action="/admin/delete/car?carId=${car.id}" method="DELETE">
+                        <input type="submit" class="btn btn-danger m-3" value="Delete"/>
+                    </form:form>
+                </div>
 
-                <a class="btn btn-primary mb-2" href="${pageContext.request.contextPath}/admin/update/car/${car.id}">Update</a>
-                <form:form action="/admin/delete/car?carId=${car.id}" method="DELETE">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form:form>
+                <c:if test="${account != null}">
+                    <div class="border-top">
+                        <p class="mt-3">Rented by ${account.firstName} ${account.lastName} (${account.email})</p>
+                        <p>
+                            <form:form action="/admin/return" method="POST">
+                                <input type="hidden" name="accountId" value="${account.id}">
+                                <input type="hidden" name="carId" value="${car.id}">
+                                <input type="submit" class="btn btn-primary" value="Returned" />
+                            </form:form>
+                        </p>
+
+                    </div>
+                </c:if>
             </div>
         </div>
     </c:forEach>
