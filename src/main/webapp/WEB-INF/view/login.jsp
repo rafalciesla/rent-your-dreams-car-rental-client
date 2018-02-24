@@ -6,119 +6,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <jsp:include page="../resources/css" />
+    <jsp:include page="../resources/js" />
+    <jsp:include page="../resources/img" />
+
     <meta charset="UTF-8">
-
-    <jsp:include page="../resources/css/bootstrap.css" />
-    <jsp:include page="../resources/js/bootstrap.min.js" />
-    <jsp:include page="../resources/js/jquery-3.3.1.min.js" />
-    <jsp:include page="../resources/img/carousel/bkgrnd1.jpg" />
-    <jsp:include page="../resources/img/carousel/bkgrnd2.jpg" />
-    <jsp:include page="../resources/img/carousel/bkgrnd3.jpg" />
-
     <!-- If IE use the latest rendering engine -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <!-- Set the page to the width of the device and set the zoon level -->
     <meta name="viewport" content="width = device-width, initial-scale = 1">
     <title>Rent Your Dream</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <style>
-        .jumbotron{
-            background-color:#1F1E1E;
-            color:white;
-            font-family: 'Lato';
-        }
-
-        /* Adds borders for tabs */
-        .tab-content {
-            border-left: 1px solid #ddd;
-            border-right: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-            padding: 10px;
-        }
-        .nav-tabs {
-            margin-bottom: 0;
-        }
-
-        .red-style {
-            background-color: #720400;
-            color: white;
-        }
-
-        .red-style a {
-            color: white;
-        }
-
-        /* Carousel Styling */
-        .slide1{
-            background-image: url('img/carousel/bkgrnd1.jpg');
-            height: 500px;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-        }
-        .slide2{
-            background-image: url('img/carousel/bkgrnd2.jpg');
-            height: 500px;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-        }
-        .slide3{
-            background-image: url('img/carousel/bkgrnd3.jpg');
-            height: 500px;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-        }
-        .carousel-caption h1{
-            font-size: 4em;
-            font-family: 'Impact';
-            padding-bottom: .1em;
-        }
-        .carousel-caption p{
-            font-size: .1em;
-        }
-
-        .top-line {
-            background-color: #1e1e1e;
-            color: white;
-            height: auto;
-        }
-
-        .top-line a {
-            color: #a3a3a3;
-        }
-
-        .logo {
-            color: red;
-        }
-
-        .logo a {
-            color: #a00000;
-            border: 2px solid #a00000;
-            font-weight: bold;
-        }
-
-        .main-container {
-            margin-top: 50px;
-        }
-
-        .error {
-            color: red;
-        }
-
-        footer {
-            margin-top: 100px;
-            color: #a3a3a3;
-            font-size: 12px;
-        }
-
-    </style>
-
 </head>
+
 <body>
 
 <div class="top-line">
