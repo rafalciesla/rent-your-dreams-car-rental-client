@@ -1,12 +1,14 @@
 package com.ciesla.rentyourdreamscarrentalclient.service;
 
 import com.ciesla.rentyourdreamscarrentalclient.dto.Account;
+import com.ciesla.rentyourdreamscarrentalclient.dto.RentalRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AccountService {
@@ -35,5 +37,9 @@ public class AccountService {
 
     public void updateAccount(Account account) {
         restTemplate.put(rentalServiceUrl + "/account/update", account);
+    }
+
+    public void deleteOtherRequestsFromThatAccount(Integer id) {
+        restTemplate.delete(rentalServiceUrl + "/account/delete/requests/" + id);
     }
 }

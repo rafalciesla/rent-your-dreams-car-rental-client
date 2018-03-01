@@ -2,6 +2,7 @@ package com.ciesla.rentyourdreamscarrentalclient.controller;
 
 import com.ciesla.rentyourdreamscarrentalclient.dto.Account;
 import com.ciesla.rentyourdreamscarrentalclient.dto.Car;
+import com.ciesla.rentyourdreamscarrentalclient.dto.RentalRequest;
 import com.ciesla.rentyourdreamscarrentalclient.service.AccountService;
 import com.ciesla.rentyourdreamscarrentalclient.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
-import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/account")
@@ -47,10 +46,27 @@ public class AccountController {
     public String requestRent(@RequestParam("carId") Integer id, Authentication authentication) {
         Car car = carService.findCarById(id);
         Account account = accountService.findAccountByEmail(authentication.getName());
-        List<Account> requestList = car.getUserRequests();
-        requestList.add(account);
+        Set<RentalRequest> carRequestList = car.getUserRequests();
+
+        if(requestFromThatAccountAlreadyExists(carRequestList, account.getId())) {
+            return "redirect:/";
+        }
+
+        RentalRequest request = new RentalRequest(account.getId(), account.getEmail(), account.getFirstName(), account.getLastName(), car.getId());
+        carRequestList.add(request);
+
+        accountService.updateAccount(account);
         carService.updateCar(car);
 
         return "redirect:/";
+    }
+
+    private boolean requestFromThatAccountAlreadyExists(Set<RentalRequest> requests, Integer accountId) {
+        for(RentalRequest request : requests) {
+            if(request.getAccountId().equals(accountId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

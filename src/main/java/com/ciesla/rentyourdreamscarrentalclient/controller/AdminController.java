@@ -35,24 +35,28 @@ public class AdminController {
     }
 
     @GetMapping("/panel")
-    public String adminPanel() {
+    public String adminPanel(ModelMap modelMap) {
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         return "admin-panel";
     }
 
     @GetMapping("/cars")
     public String showAllCars(ModelMap modelMap) {
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         List<Car> cars = carService.findAll();
         modelMap.addAttribute("cars", cars);
         return "admin-cars";
     }
 
     @GetMapping("/cars/search")
-    public String searchForACar() {
+    public String searchForACar(ModelMap modelMap) {
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         return "admin-cars-search-form";
     }
 
     @PostMapping("/cars/search")
     public String searchForACar(@RequestParam("keyword") String keyword, ModelMap modelMap) {
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         List<Car> carsFound = carService.findCarsByKeyword(keyword);
         modelMap.addAttribute("cars", carsFound);
         return "admin-cars-search-results";
@@ -60,6 +64,7 @@ public class AdminController {
 
     @GetMapping("/car")
     public String showCarById(@RequestParam("carId") Integer id, ModelMap modelMap) {
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         Car car = carService.findCarById(id);
         if(car.getRentedToUserId() != null) {
             Account account = accountService.findAccountById(car.getRentedToUserId());
@@ -71,6 +76,7 @@ public class AdminController {
 
     @GetMapping("/new/car")
     public String addNewCar(ModelMap modelMap) {
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         Car car = new Car();
         modelMap.addAttribute("car", car);
         return "admin-new-car";
@@ -88,6 +94,7 @@ public class AdminController {
 
     @GetMapping("/update/car")
     public String updateCar(@RequestParam("carId") Integer id, ModelMap modelMap) {
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         Car car = carService.findCarById(id);
         modelMap.addAttribute("car", car);
         return "admin-update-car";
@@ -97,12 +104,12 @@ public class AdminController {
     public String updateCar(@Valid @ModelAttribute("car") Car car, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             Integer carId = car.getId();
-            if(car.getRentedToUserId() == null) {
-                car.setAvailability(true);
-            }
-            return "redirect:/admin/update/car/" + carId;
+            return "redirect:/admin/update/car?carId=" + carId;
         }
 
+        if(car.getRentedToUserId() == null) {
+            car.setAvailability(true);
+        }
         carService.updateCar(car);
         return "redirect:/admin/panel";
     }
@@ -115,6 +122,7 @@ public class AdminController {
 
     @GetMapping("/accounts")
     public String showAllAccounts(ModelMap modelMap) {
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         List<Account> accounts = accountService.findAll();
         modelMap.addAttribute("accounts", accounts);
         return "admin-accounts";
@@ -122,6 +130,7 @@ public class AdminController {
 
     @GetMapping("/account")
     public String showAccountById(@RequestParam("accountId") Integer id, ModelMap modelMap) {
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         Account account = accountService.findAccountById(id);
 
         modelMap.addAttribute("account", account);
@@ -138,13 +147,16 @@ public class AdminController {
         Car car = findCarByIdFromRequest(request);
 
         account.setRentedCarId(car.getId());
+
         car.setTimesRented(car.getTimesRented() + 1);
         car.setAvailability(false);
         car.setRentedToUserId(account.getId());
-        car.getUserRequests().clear();
+        car.getUserRequests().remove(account);
 
         accountService.updateAccount(account);
         carService.updateCar(car);
+
+        accountService.deleteOtherRequestsFromThatAccount(account.getId());
 
         return "redirect:/";
     }

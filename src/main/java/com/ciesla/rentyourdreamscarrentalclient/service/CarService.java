@@ -51,4 +51,8 @@ public class CarService {
         carsFound.addAll(matchedByBrandName);
         return carsFound;
     }
+
+    public Integer getNumberOfRequests() {
+        return restTemplate.getForObject(rentalServiceUrl + "/car/requests", Integer.class);
+    }
 }

@@ -36,6 +36,11 @@
                     <div class="dropdown show">
                         <a class="dropdown-style rounded p-2" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="d-md-inline d-none"><c:if test="${pageContext.request.userPrincipal.name != null}">${pageContext.request.userPrincipal.name}</c:if> </span><i class="fa fa-user"></i>
+                            <security:authorize access="hasRole('ADMIN')">
+                                <c:if test="${numberOfRequests != 0}">
+                                    <span class="badge notification">${numberOfRequests}</span>
+                                </c:if>
+                            </security:authorize>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
@@ -45,7 +50,7 @@
                                 <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/panel">Admin panel</a>
                             </security:authorize>
                             <security:authorize access="hasRole('USER')">
-                                <a class="dropdown-item" href="${pageContext.request.contextPath}/cars">My cars</a>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/account/">My account</a>
                             </security:authorize>
                             <c:if test="${pageContext.request.userPrincipal.name != null}"><a class="dropdown-item" href="<c:url value="/logout" />">Logout</a></c:if>
                         </div>
@@ -59,7 +64,7 @@
 
         <h1>Cars:</h1>
 
-        <table class="table table-striped mt-4">
+        <table class="table mt-4">
 
             <thead>
             <tr>

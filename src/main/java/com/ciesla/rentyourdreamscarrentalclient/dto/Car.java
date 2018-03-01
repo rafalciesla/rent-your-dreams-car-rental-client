@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -42,7 +43,7 @@ public class Car {
     private Integer timesRented;
     private Integer rentedToUserId;
     private boolean availability;
-    private List<Account> userRequests;
+    private Set<RentalRequest> userRequests;
 
     public Car() {
     }

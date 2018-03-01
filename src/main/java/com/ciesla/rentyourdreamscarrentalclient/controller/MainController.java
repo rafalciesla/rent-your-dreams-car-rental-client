@@ -38,11 +38,15 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage(ModelMap modelMap, Authentication authentication) {
+        List<Car> popularCars = carService.findAllByPopularity();
         if(authentication != null) {
             Account loggedAccount = accountService.findAccountByEmail(authentication.getName());
             modelMap.addAttribute("loggedAccount", loggedAccount);
+            if(loggedAccount.getEmail().equals("admin@ryd.com")) {
+                modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
+            }
         }
-        List<Car> popularCars = carService.findAllByPopularity();
+
         modelMap.addAttribute("popularCars", popularCars);
         return "index";
     }

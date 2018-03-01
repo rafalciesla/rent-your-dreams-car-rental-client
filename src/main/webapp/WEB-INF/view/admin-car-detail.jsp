@@ -37,6 +37,11 @@
                     <div class="dropdown show">
                         <a class="dropdown-style rounded p-2" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="d-md-inline d-none"><c:if test="${pageContext.request.userPrincipal.name != null}">${pageContext.request.userPrincipal.name}</c:if> </span><i class="fa fa-user"></i>
+                            <security:authorize access="hasRole('ADMIN')">
+                                <c:if test="${numberOfRequests != 0}">
+                                    <span class="badge notification">${numberOfRequests}</span>
+                                </c:if>
+                            </security:authorize>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
@@ -46,7 +51,7 @@
                                 <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/panel">Admin panel</a>
                             </security:authorize>
                             <security:authorize access="hasRole('USER')">
-                                <a class="dropdown-item" href="${pageContext.request.contextPath}/cars">My cars</a>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/account/">My account</a>
                             </security:authorize>
                             <c:if test="${pageContext.request.userPrincipal.name != null}"><a class="dropdown-item" href="<c:url value="/logout" />">Logout</a></c:if>
                         </div>
@@ -100,7 +105,7 @@
             </div>
         </div>
 
-        <c:if test="${!empty car.userRequests}">
+        <c:if test="${!empty car.userRequests && car.availability == true}">
             <div class="row m-4">
                 <h4>Rental requests:</h4>
 
@@ -116,15 +121,15 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach var="tempAccount" items="${car.userRequests}">
+                    <c:forEach var="tempRequest" items="${car.userRequests}">
                         <tr>
-                            <td class="d-md-table-cell d-none">${tempAccount.id}</td>
-                            <td>${tempAccount.email}</td>
-                            <td>${tempAccount.firstName} ${tempAccount.lastName}</td>
+                            <td class="d-md-table-cell d-none">${tempRequest.accountId}</td>
+                            <td>${tempRequest.accountEmail}</td>
+                            <td>${tempRequest.accountFirstName} ${tempRequest.accountLastName}</td>
 
                             <td>
                                 <form:form action="/admin/rent" method="POST">
-                                    <input type="hidden" name="accountId" value="${tempAccount.id}">
+                                    <input type="hidden" name="accountId" value="${tempRequest.accountId}">
                                     <input type="hidden" name="carId" value="${car.id}">
                                     <input type="submit" class="btn btn-primary" value="Rent to"/>
                                 </form:form>
