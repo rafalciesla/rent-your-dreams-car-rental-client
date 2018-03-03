@@ -10,7 +10,7 @@ Build tool: Maven
 
 App is responsive
 
-### Application is up and running on:
+### Application is up and running in cloud:
 
 http://rentyourdreams.herokuapp.com/
 
