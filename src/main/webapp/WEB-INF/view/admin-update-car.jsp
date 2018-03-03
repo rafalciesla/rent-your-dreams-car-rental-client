@@ -119,7 +119,10 @@
                 <form:input path="description" class="form-control" type="textarea" name="description" placeholder="Description" />
             </div>
 
-            <input class="btn btn-primary mt-3" type="submit" name="submit" value="Update">
+            <form:input path="availability" type="hidden" name="availability" />
+            <form:input path="timesRented" type="hidden" name="timesRented" />
+
+            <input onclick="if (!(confirm('Are you sure you want to update this car?'))) return false" class="btn btn-primary mt-3" type="submit" name="submit" value="Update">
         </form:form>
 
     </div>

@@ -32,6 +32,7 @@ public class AccountController {
     @GetMapping("/")
     public String accountDetails(Authentication authentication, ModelMap modelMap) {
         String email = authentication.getName();
+
         Account account = accountService.findAccountByEmail(email);
         if(account.getRentedCarId() != null) {
             Car rentedCar = carService.findCarById(account.getRentedCarId());
@@ -52,8 +53,7 @@ public class AccountController {
             return "redirect:/";
         }
 
-        RentalRequest request = new RentalRequest(account.getId(), account.getEmail(), account.getFirstName(), account.getLastName(), car.getId());
-        carRequestList.add(request);
+        carRequestList.add(new RentalRequest(account.getId(), account.getEmail(), account.getFirstName(), account.getLastName(), car.getId()));
 
         accountService.updateAccount(account);
         carService.updateCar(car);

@@ -104,7 +104,8 @@
                 </div>
                 <div class="col-md-6 p-3">
 
-                    <p>${rentedCar.description}</p>
+                    <p class="m-3">${rentedCar.description}</p>
+                    <a class="m-3 btn btn-primary" href="${pageContext.request.contextPath}/admin/car?carId=${rentedCar.id}">More</a>
 
                 </div>
             </div>

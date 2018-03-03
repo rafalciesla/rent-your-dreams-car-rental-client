@@ -10,7 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
@@ -42,9 +41,9 @@ public class AdminController {
 
     @GetMapping("/cars")
     public String showAllCars(ModelMap modelMap) {
-        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         List<Car> cars = carService.findAll();
         modelMap.addAttribute("cars", cars);
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         return "admin-cars";
     }
 
@@ -56,29 +55,29 @@ public class AdminController {
 
     @PostMapping("/cars/search")
     public String searchForACar(@RequestParam("keyword") String keyword, ModelMap modelMap) {
-        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         List<Car> carsFound = carService.findCarsByKeyword(keyword);
         modelMap.addAttribute("cars", carsFound);
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         return "admin-cars-search-results";
     }
 
     @GetMapping("/car")
     public String showCarById(@RequestParam("carId") Integer id, ModelMap modelMap) {
-        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         Car car = carService.findCarById(id);
         if(car.getRentedToUserId() != null) {
             Account account = accountService.findAccountById(car.getRentedToUserId());
             modelMap.addAttribute("account", account);
         }
         modelMap.addAttribute("car", car);
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         return "admin-car-detail";
     }
 
     @GetMapping("/new/car")
     public String addNewCar(ModelMap modelMap) {
-        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         Car car = new Car();
         modelMap.addAttribute("car", car);
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         return "admin-new-car";
     }
 
@@ -94,9 +93,9 @@ public class AdminController {
 
     @GetMapping("/update/car")
     public String updateCar(@RequestParam("carId") Integer id, ModelMap modelMap) {
-        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         Car car = carService.findCarById(id);
         modelMap.addAttribute("car", car);
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         return "admin-update-car";
     }
 
@@ -105,10 +104,6 @@ public class AdminController {
         if(bindingResult.hasErrors()) {
             Integer carId = car.getId();
             return "redirect:/admin/update/car?carId=" + carId;
-        }
-
-        if(car.getRentedToUserId() == null) {
-            car.setAvailability(true);
         }
         carService.updateCar(car);
         return "redirect:/admin/panel";
@@ -122,15 +117,14 @@ public class AdminController {
 
     @GetMapping("/accounts")
     public String showAllAccounts(ModelMap modelMap) {
-        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         List<Account> accounts = accountService.findAll();
         modelMap.addAttribute("accounts", accounts);
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         return "admin-accounts";
     }
 
     @GetMapping("/account")
     public String showAccountById(@RequestParam("accountId") Integer id, ModelMap modelMap) {
-        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         Account account = accountService.findAccountById(id);
 
         modelMap.addAttribute("account", account);
@@ -138,11 +132,37 @@ public class AdminController {
             Car rentedCar = carService.findCarById(account.getRentedCarId());
             modelMap.addAttribute("rentedCar", rentedCar);
         }
+        modelMap.addAttribute("numberOfRequests", carService.getNumberOfRequests());
         return "admin-account-detail";
     }
 
     @PostMapping("/rent")
     public String rentCarToUser(HttpServletRequest request) {
+        performRentalActions(request);
+        return "redirect:/admin/panel";
+    }
+
+    @PostMapping("/return")
+    public String returnCar(HttpServletRequest request) {
+        performReturningActions(request);
+        return "redirect:/admin/panel";
+    }
+
+
+
+    private void performReturningActions(HttpServletRequest request) {
+        Account account = findAccountByIdFromRequest(request);
+        Car car = findCarByIdFromRequest(request);
+
+        account.setRentedCarId(null);
+        car.setAvailability(true);
+        car.setRentedToUserId(null);
+
+        accountService.updateAccount(account);
+        carService.updateCar(car);
+    }
+
+    private void performRentalActions(HttpServletRequest request) {
         Account account = findAccountByIdFromRequest(request);
         Car car = findCarByIdFromRequest(request);
 
@@ -157,23 +177,6 @@ public class AdminController {
         carService.updateCar(car);
 
         accountService.deleteOtherRequestsFromThatAccount(account.getId());
-
-        return "redirect:/";
-    }
-
-    @PostMapping("/return")
-    public String returnCar(HttpServletRequest request) {
-        Account account = findAccountByIdFromRequest(request);
-        Car car = findCarByIdFromRequest(request);
-
-        account.setRentedCarId(null);
-        car.setAvailability(true);
-        car.setRentedToUserId(null);
-
-        accountService.updateAccount(account);
-        carService.updateCar(car);
-
-        return "redirect:/";
     }
 
     private Car findCarByIdFromRequest(HttpServletRequest request) {

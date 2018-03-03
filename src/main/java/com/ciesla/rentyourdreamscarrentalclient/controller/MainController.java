@@ -27,13 +27,13 @@ public class MainController {
 
     private final CarService carService;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public MainController(AccountService accountService, CarService carService) {
+    public MainController(AccountService accountService, CarService carService, JdbcTemplate jdbcTemplate) {
         this.accountService = accountService;
         this.carService = carService;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @GetMapping("/")

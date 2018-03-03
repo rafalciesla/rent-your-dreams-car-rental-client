@@ -64,7 +64,7 @@
 
         <h4>Accounts:</h4>
 
-        <table class="table table-striped table-hover mt-4">
+        <table class="table table-striped table-responsive-sm table-hover mt-4">
 
             <thead>
             <tr>

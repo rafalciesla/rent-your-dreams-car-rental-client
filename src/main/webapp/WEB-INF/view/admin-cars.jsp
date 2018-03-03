@@ -64,7 +64,7 @@
 
         <h1>Cars:</h1>
 
-        <table class="table mt-4">
+        <table class="table table-responsive-sm mt-4">
 
             <thead>
             <tr>

@@ -82,12 +82,9 @@
                 </div>
                 <div class="col-md-6 p-3">
                     <div class="row">
-                        <p class="m-3">${car.description}</p>
+                        <p class="m-3">${tempCar.description}</p>
 
-                        <a class="btn btn-primary m-3" href="${pageContext.request.contextPath}/admin/update/car?carId=${car.id}">Update</a>
-                        <form:form action="/admin/delete/car?carId=${car.id}" method="DELETE">
-                            <input type="submit" class="btn btn-danger m-3" value="Delete"/>
-                        </form:form>
+                        <a class="m-3 btn btn-primary" href="${pageContext.request.contextPath}/admin/car?carId=${tempCar.id}">More</a>
                     </div>
 
                     <c:if test="${account != null}">

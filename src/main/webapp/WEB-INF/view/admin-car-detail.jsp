@@ -83,10 +83,13 @@
                 <div class="row">
                     <p class="m-3">${car.description}</p>
 
-                    <a class="btn btn-primary m-3" href="${pageContext.request.contextPath}/admin/update/car?carId=${car.id}">Update</a>
-                    <form:form action="/admin/delete/car?carId=${car.id}" method="DELETE">
-                        <input type="submit" class="btn btn-danger m-3" value="Delete"/>
-                    </form:form>
+                    <c:if test="${account == null}">
+                        <a class="btn btn-primary m-3" href="${pageContext.request.contextPath}/admin/update/car?carId=${car.id}">Update</a>
+                        <form:form action="/admin/delete/car?carId=${car.id}" method="DELETE">
+                            <input onclick="if (!(confirm('Are you sure you want to delete this car?'))) return false" type="submit" class="btn btn-danger m-3" value="Delete"/>
+                        </form:form>
+                    </c:if>
+
                 </div>
 
                     <c:if test="${account != null}">
