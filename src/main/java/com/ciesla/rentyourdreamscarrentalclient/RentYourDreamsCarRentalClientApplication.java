@@ -2,10 +2,7 @@ package com.ciesla.rentyourdreamscarrentalclient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,9 +27,9 @@ public class RentYourDreamsCarRentalClientApplication {
 	public DriverManagerDataSource dataSource(){
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
-		driverManagerDataSource.setUrl("jdbc:postgresql://ec2-79-125-110-209.eu-west-1.compute.amazonaws.com:5432/ddquepm3vrtem9?sslmode=require");
-		driverManagerDataSource.setUsername("okdstfxkheocom");
-		driverManagerDataSource.setPassword("0f2f9456e11f910a15fa6c073038894da178b8ea3cc31c8e67ab3aed0f2a516a");
+		driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
+		driverManagerDataSource.setUsername("postgres");
+		driverManagerDataSource.setPassword("postgres");
 		return driverManagerDataSource;
 	}
 
