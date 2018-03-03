@@ -5,7 +5,7 @@
 
 	<groupId>com.ciesla</groupId>
 	<artifactId>rent-your-dreams-car-rental-client</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-RELEASE</version>
 	<packaging>jar</packaging>
 
 	<name>rent-your-dreams-car-rental-client</name>
