@@ -38,7 +38,7 @@ Admin is able to:
 (*) If there is request for a rent - admin will see notification with number of waiting requests. Also in list of all cars in admin panel, cars waiting for rent are highlighted.
 
 
-### How to run it locally:
+## How to run it locally:
 
 You will need Maven installed locally and PostgreSQL database.
 
