@@ -31,7 +31,7 @@ Admin is able to:
 * Update already existing car
 * Delete car
 * See all cars with details
-* Rent a car to user which requested for a rent(*)
+* Rent a car to user who requested for a rent(*)
 * Return a car after and make it available again
 * Search for a car
 * See all user accounts
