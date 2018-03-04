@@ -60,7 +60,7 @@ https://github.com/rafalciesla/rent-your-dreams-car-rental-client/archive/master
 
 3. Enter the server side app folder and go to "src/main/resources" and edit application.properties file.
 
-4. Set datasource url, username and password for your specific database (*).
+4. Set datasource url, username and password for your specific database (**).
 
 5. Repeat step 3 and 4 for client side app.
 
@@ -129,7 +129,7 @@ UPDATE user_roles SET role='ROLE_ADMIN' WHERE email='your@email.com'
 This is it, enjoy! :)
 
 
-(*) IMPORTANT!!! If you want to run this application again and not lose your data from database, after first start you have to edit application.properties file in server side of application and change this line:
+(**) IMPORTANT!!! If you want to run this application again and not lose your data from database, after first start you have to edit application.properties file in server side of application and change this line:
 
 ```
 spring.jpa.hibernate.ddl-auto=create-drop
