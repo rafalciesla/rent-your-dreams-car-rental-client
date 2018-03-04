@@ -124,13 +124,13 @@ localhost:8383
 UPDATE user_roles SET role='ROLE_ADMIN' WHERE email='your@email.com'
 ```
 
-(*) IMPORTANT!!! If you want to run this application again and not lose your data from database, after first start you have to edit application.properties file and change this line:
+(*) IMPORTANT!!! If you want to run this application again and not lose your data from database, after first start you have to edit application.properties file in server side of application and change this line:
 
 ```
 spring.jpa.hibernate.ddl-auto=create-drop
 ```
 
-for:
+to:
 
 ```
 spring.jpa.hibernate.ddl-auto=validate
