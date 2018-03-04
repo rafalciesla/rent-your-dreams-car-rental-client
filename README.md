@@ -14,6 +14,7 @@ http://rentyourdreams.herokuapp.com/
 
 (App is sometimes sleepy, so give it 30 or 40 secs for wake up :)
 
+
 ## Features:
 
 User is able to:
@@ -36,6 +37,7 @@ Admin is able to:
 * See all user accounts
 
 (*) If there is request for a rent - admin will see notification with number of waiting requests. Also in list of all cars in admin panel, cars waiting for rent are highlighted.
+
 
 
 ## How to run it locally:
