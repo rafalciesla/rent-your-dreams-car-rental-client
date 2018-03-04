@@ -140,3 +140,5 @@ to:
 ```
 spring.jpa.hibernate.ddl-auto=validate
 ```
+
+And then repeat step 6
