@@ -45,13 +45,11 @@ You will need Maven installed locally and PostgreSQL database.
 1. Download server side and client side of application
 
 Server:
-
 ```
 https://github.com/rafalciesla/rent-your-dreams-car-rental-server/archive/master.zip
 ```
 
 Client:
-
 ```
 https://github.com/rafalciesla/rent-your-dreams-car-rental-client/archive/master.zip
 ```
