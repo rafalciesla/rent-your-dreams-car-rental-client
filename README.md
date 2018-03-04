@@ -126,7 +126,7 @@ localhost:8383
 UPDATE user_roles SET role='ROLE_ADMIN' WHERE email='your@email.com'
 ```
 
-This is it, enjoy! :)
+### This is it, enjoy! :)
 
 
 (**) IMPORTANT!!! If you want to run this application again and not lose your data from database, after first start you have to edit application.properties file in server side of application and change this line:
