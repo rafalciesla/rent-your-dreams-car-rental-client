@@ -1,5 +1,6 @@
 package com.ciesla.rentyourdreamscarrentalclient;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,18 @@ public class RentYourDreamsCarRentalClientApplication {
 		SpringApplication.run(RentYourDreamsCarRentalClientApplication.class, args);
 	}
 
+	@Value("${spring.datasource.driverClassName}")
+	private String driverClassName;
+
+	@Value("${spring.datasource.url}")
+	private String dataSourceUrl;
+
+	@Value("${spring.datasource.username}")
+	private String dataSourceUsername;
+
+	@Value("${spring.datasource.password}")
+	private String dataSourcePassword;
+
 	@Bean
 	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
@@ -26,10 +39,10 @@ public class RentYourDreamsCarRentalClientApplication {
 	@Bean
 	public DriverManagerDataSource dataSource(){
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
-		driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-		driverManagerDataSource.setUsername("postgres");
-		driverManagerDataSource.setPassword("postgres");
+		driverManagerDataSource.setDriverClassName(driverClassName);
+		driverManagerDataSource.setUrl(dataSourceUrl);
+		driverManagerDataSource.setUsername(dataSourceUsername);
+		driverManagerDataSource.setPassword(dataSourcePassword);
 		return driverManagerDataSource;
 	}
 
