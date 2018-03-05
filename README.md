@@ -4,7 +4,7 @@ Responsive web app for supercar rental.
 
 ### Technologies:
 
-Spring Boot / Sring Security / Hibernate / REST API / PostgreSQL / Bootstrap
+Spring (Boot, MVC, Data, Security) / Hibernate / REST API / PostgreSQL / Bootstrap
 
 Build tool: Maven
 
